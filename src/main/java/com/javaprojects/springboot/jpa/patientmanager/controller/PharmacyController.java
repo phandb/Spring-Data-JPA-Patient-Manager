@@ -55,7 +55,7 @@ public class PharmacyController {
 		Pharmacy thePharmacy = new Pharmacy();
 		
 		theModel.addAttribute("pharmacy", thePharmacy);
-		theModel.addAttribute("breadcrumbItem", "Add Pharmacy");
+		theModel.addAttribute("breadcrumbItem", "Add New Pharmacy");
 		
 		return "/admin/pharmacy-form";
 	}

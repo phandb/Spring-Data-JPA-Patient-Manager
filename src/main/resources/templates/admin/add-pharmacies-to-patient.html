@@ -42,33 +42,26 @@
 							  th:object="${pharmacy}" method="POST">	
 				
 						<!-- Add new button: Add Patient -->
-					
-						<button type="submit" class="btn btn-primary mb-3">Add Selected Pharmacy</button>	
-					
-					
-					<!--  add a search box 
-								
-			      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-			        <div class="input-group">
-			          <input type="text" class="form-control" placeholder="Search pharmacy..." aria-label="Search" aria-describedby="basic-addon2">
-			          <div class="input-group-append">
-			            <button class="btn btn-primary" type="button">
-			              <i class="fas fa-search"></i>
-			            </button>
-			          </div>
+					<div class="navbar">	
+						<button type="submit" class="btn btn-primary mb-3">Add Selected Pharmacy</button>
+					<!--  	<a role="button" class="btn btn-danger col-sm-2" 
+							th:href="@{/pharmacy/showFormForAdd }">Add New Pharmacy</a>
+					-->
+						<a role="button" class="btn btn-danger col-sm-2" 
+											th:href="@{/patient/showPatientInfo(patientId=${patient.id}) }">Cancel</a>
+				
 			        </div>
-			      </form>
-		           --> 
+			     
 				<!--  </div>  -->
 					
 			<table class="table table-hover table-bordered table-sm">
 			<thead class="thead-light text-center">
 				<tr>
-					<th scope="col">#</th>
+					<th scope="col">Select</th>
 					<th scope="col">Pharmacy Name</th>
 					<th scope="col">Address</th>
 					<th scope="col">Phone</th>
-					<th scope="col">Action</th>
+					
 					
 				</tr>
 			</thead>
@@ -84,20 +77,20 @@
 						
 						<td th:text=${pharmacy.pharmacyAddress}/>
 						<td th:text=${pharmacy.pharmacyPhone}/>
-						<td>
+						
 						
 							<!-- display view, update and delete link -->
-							
-							<!--  
+							<!--<td>
+						
 							<a class="btn btn-outline-success btn-sm" th:href="@{/pharmacy/showFormForUpdate(pharmacyId=${pharmacy.id}) }"
 								role="button">Edit</a>
 							
 							<a class="btn btn-outline-danger btn-sm" th:href="@{/pharmacy/delete(pharmacyId=${pharmacy.id}) }"
 								onclick="if (!(confirm('Are you sure to delete this patient?'))) return false"
 								role="button">Delete</a>
-								
+						</td>		
 						-->
-						</td>
+						
 						
 					</tr>
 				</tbody>

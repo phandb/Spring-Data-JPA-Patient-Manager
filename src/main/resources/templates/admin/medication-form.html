@@ -62,13 +62,16 @@
 								<input class="form-control" type="text" th:field="*{medicationDosage}" name="medicationDosage" />
 							
 							</div>					
-							
+							<div class="navbar">
+								<button type="submit" class="btn btn-primary col-sm-4 ">Save</button>
+								<a role="button" class="btn btn-danger col-sm-4" 
+										th:href="@{/patient/showPatientInfo(patientId=${patient.id}) }">Cancel</a>
+							</div>
 							 
-							<button type="submit" class="btn btn-primary col-sm-4 ">Save</button>		
+							
 						</form>
 						
-						<hr>
-						<a th:href="@{/patient/showPatientInfo(patientId=${patient.id}) }">Back to Patient Info</a>
+						
 						
 					</div>
 				</div>

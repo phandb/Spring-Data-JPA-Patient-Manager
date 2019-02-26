@@ -40,8 +40,12 @@
 					<!-- Add new button: Add Patient -->
 				<form  action="#" th:action="@{/physician/addPhysicianToPatient(thePatientId=${patient.id}, physicianCheckboxList) }"
 											  th:object="${physician}" method="POST">
-											  
-					<button type="submit" class="btn btn-primary mb-3">Add Selected Physicians</button>	
+				 	<div class="navbar">						  
+						<button type="submit" class="btn btn-primary mb-3">Add Selected Physicians</button>	
+					<!--  <a role="button" class="btn btn-danger col-sm-2" 
+												th:href="@{/patient/showPatientInfo(patientId=${patient.id}) }">Cancel</a>
+					-->	
+			        </div>
 				<!-- 
 					<a type="button" class="btn btn-primary mb-3" role="button"
 							th:href="@{/physician/addPhysicianToPatient(patientId=${patient.id}, physicianCheckboxList) }">Add Selected Physicians</a> 
@@ -70,16 +74,17 @@
 							<td th:text=${physician.physicianSpecialty}/>
 							<td th:text=${physician.physicianAddress}/>
 							<td th:text=${physician.physicianPhone}/>
-							<td>
+							
 							
 								<!-- display view, update and delete link 
-															
+							<td>								
 								<a class="btn btn-outline-success btn-sm" 
 									th:href="@{/physician/addPhysicianToPatient(patientId=${patient.id}, physicianId=${physician.id}) }"
 									role="button">Add</a>
+							</td>	
 								-->
 								
-							</td>
+							
 							
 						</tr>
 					</tbody>

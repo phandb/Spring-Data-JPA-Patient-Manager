@@ -53,7 +53,7 @@ public class MedicationController {
 		
 		theModel.addAttribute("medication", theMedication);
 		theModel.addAttribute("patient", thePatient);
-		theModel.addAttribute("breadcrumItem", "Add Medication");
+		theModel.addAttribute("breadcrumItem", "Add Medication For Patient");
 		
 		
 		return "/admin/medication-form";

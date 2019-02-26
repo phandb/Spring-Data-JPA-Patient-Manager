@@ -39,7 +39,7 @@
 			
 			<!-- Start Card Form -->
 				<div class="card w-50 mx-auto mb-5 ">
-					<div class="card-body">
+					<div class="card-body" th:object="${patient}">
 						<form action="#" th:action="@{/physician/savePhysician}" th:object="${physician}" method="POST">
 
 							<!-- need to associate this data with employee id -->
@@ -64,9 +64,13 @@
 								<input class="form-control" type="text" th:field="*{physicianPhone}" />
 								
 							</div>					
+							<div class="navbar">
+								<button type="submit" class="btn btn-primary col-sm-4 ">Save</button>
+								 <a role="button" class="btn btn-danger col-sm-4" 
+										th:href="@{/patient/list }">Cancel</a>
 							
-							 
-							<button type="submit" class="btn btn-primary col-sm-4 ">Save</button>		
+							</div>
+							 	
 						</form>
 		
 					</div>

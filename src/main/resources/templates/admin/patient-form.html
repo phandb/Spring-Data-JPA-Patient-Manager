@@ -74,12 +74,16 @@
 								<input class="form-control" type="text" th:field="*{address}" placeholder="Address"/>
 								
 							</div>
+							<div class="navbar">
+								<button type="submit" class="btn btn-primary col-sm-4 ">Save</button>
+								<a role="button" class="btn btn-danger col-sm-4" th:href="@{/patient/list}">Cancel</a>
+							</div>
 							 
-							<button type="submit" class="btn btn-primary col-sm-4 ">Save</button>		
+									
 						</form>
 						
-						<hr>
-						<a th:href="@{/patient/list}">Back to Patient List</a>
+						
+						
 		
 					</div>
 				</div>

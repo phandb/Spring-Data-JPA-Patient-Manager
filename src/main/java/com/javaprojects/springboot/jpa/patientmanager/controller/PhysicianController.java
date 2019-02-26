@@ -51,7 +51,7 @@ public class PhysicianController {
 		Physician thePhysician = new Physician();
 		
 		theModel.addAttribute("physician", thePhysician);
-		theModel.addAttribute("breadcrumbItem", "Add Physician");
+		theModel.addAttribute("breadcrumbItem", "Add New Physician");
 		
 		return "/admin/physician-form";
 	}

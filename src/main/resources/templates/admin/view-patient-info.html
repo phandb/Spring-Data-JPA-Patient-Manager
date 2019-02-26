@@ -135,6 +135,7 @@
 						<th scope="col">Name</th>
 						<th scope="col">Specialty</th>
 						<th scope="col">Address</th>
+						<th scope="col">Phone</th>
 						<th scope="col">Action</th>
 						
 					</tr>
@@ -148,6 +149,7 @@
 						<td th:text=${physician.physicianName}/>
 						<td th:text=${physician.physicianSpecialty}/>
 						<td th:text=${physician.physicianAddress}/>
+						<td th:text=${physician.physicianPhone}/>
 						
 						<td>
 										
@@ -189,7 +191,7 @@
 						<th scope="col">#</th>
 						<th scope="col">Pharmacy Name</th>
 						<th scope="col">Address</th>
-						
+						<th scope="col">Phone</th>
 						<th scope="col">Action</th>
 						
 					</tr>
@@ -202,6 +204,7 @@
 						<td th:text=${iterationStatus.count}/>
 						<td th:text=${pharmacy.pharmacyName}/>
 						<td th:text=${pharmacy.pharmacyAddress}/>
+						<td th:text=${pharmacy.pharmacyPhone}/>
 						
 						<td>
 										
