@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+  <head th:replace="fragments/admin-template :: header-fragment">
+
+  </head>
+
+  <body id="page-top">
+	<!-------NAV BAR-------------------->
+  <div th:replace="fragments/admin-template :: navbar-fragment">
+
+   </div> <!--- End of navbar-fragment---->
+   
+	<!-----End of NAVBAR ---------------->
+  
+  <!---------------------------------- Sidebar ------------------------>
+    <div id="wrapper">
+
+      <div th:replace="fragments/admin-template :: sidebar-fragment">
+
+      
+     </div>  <!----End of sidebar fragment---> 
+     
+     
+	<!----------- Admin Main Content ------------------------>
+	
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+           <div th:replace="fragments/admin-template :: breadcrumb-fragment">
+          </div>
+
+          <!-- Icon Cards-->
+          <div class="row mg-2">
+		<!-- <div class="col-2"></div> -->	
+			<div class="col" th:object="${patient}" >
+					
+					<!-- Add new button: Add Patient -->
+				<form  action="#" th:action="@{/physician/addPhysicianToPatient(thePatientId=${patient.id}, physicianCheckboxList) }"
+											  th:object="${physician}" method="POST">
+											  
+					<button type="submit" class="btn btn-primary mb-3">Add Selected Physicians</button>	
+				<!-- 
+					<a type="button" class="btn btn-primary mb-3" role="button"
+							th:href="@{/physician/addPhysicianToPatient(patientId=${patient.id}, physicianCheckboxList) }">Add Selected Physicians</a> 
+				 -->
+				<table class="table table-hover table-bordered table-sm">
+				<thead class="thead-light text-center">
+					<tr>
+						<th scope="col">Select</th>
+						<th scope="col">Physician Name</th>
+						<th scope="col">Specialty</th>
+						<th scope="col">Address</th>
+						<th scope="col">Phone</th>
+						<!-- <th scope="col">Action</th>  -->
+						
+					</tr>
+				</thead>
+					<!-- Loop Over and print out list patient -->
+					
+					<tbody>
+					
+						<tr class="text-center" th:each="physician,iterationStatus : ${physicianList}" >
+							<td>
+							 	<input type="checkbox" th:name="physicianCheckboxList" th:value="${physician.id}" />
+							</td>
+							<td th:text=${physician.physicianName}/>
+							<td th:text=${physician.physicianSpecialty}/>
+							<td th:text=${physician.physicianAddress}/>
+							<td th:text=${physician.physicianPhone}/>
+							<td>
+							
+								<!-- display view, update and delete link 
+															
+								<a class="btn btn-outline-success btn-sm" 
+									th:href="@{/physician/addPhysicianToPatient(patientId=${patient.id}, physicianId=${physician.id}) }"
+									role="button">Add</a>
+								-->
+								
+							</td>
+							
+						</tr>
+					</tbody>
+					
+					
+				</table>
+				</form>
+		</div>
+		
+			<!-- <div class="col-2"></div> -->	
+		</div>
+            
+            
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!------------------Sticky Footer---------------->
+        <div th:replace="fragments/admin-template :: footer-fragment">
+          
+        </div>  <!--End of footer fragment--->
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    
+    <div th:replace="fragments/admin-template :: modal-fragment">
+    
+    </div>  <!---End of modal fragment--->
+    
+    <div th:replace="fragments/admin-template :: script-fragment">
+    
+    </div>  <!--End of script fragment-->
+  </body>
+
+</html>

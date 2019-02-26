@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+  <head th:replace="fragments/admin-template :: header-fragment">
+
+  </head>
+
+  <body id="page-top">
+	<!-------NAV BAR-------------------->
+  <div th:replace="fragments/admin-template :: navbar-fragment">
+
+   </div> <!--- End of navbar-fragment---->
+   
+	<!-----End of NAVBAR ---------------->
+  
+  <!---------------------------------- Sidebar ------------------------>
+    <div id="wrapper">
+
+      <div th:replace="fragments/admin-template :: sidebar-fragment">
+
+      
+     </div>  <!----End of sidebar fragment---> 
+     
+     
+	<!----------- Admin Main Content ------------------------>
+	
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+           <div th:replace="fragments/admin-template :: breadcrumb-fragment">
+          </div>
+
+          <!-- Icon Cards-->
+          <div class="row mg-2">
+		<!-- <div class="col-2"></div> -->	
+			<div class="col">
+			
+				<div class="navbar">
+				
+				
+						<!-- Add new button: Add Patient -->
+					
+						<input type="button" class="btn btn-primary" value = "Add Patient"
+								onclick="window.location.href='/patient/showFormForAdd'; return false;"/> 
+					
+					
+					<!--  add a search box -->
+								
+			      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+			        <div class="input-group">
+			          <input type="text" class="form-control" placeholder="Search patient..." aria-label="Search" aria-describedby="basic-addon2">
+			          <div class="input-group-append">
+			            <button class="btn btn-primary" type="button">
+			              <i class="fas fa-search"></i>
+			            </button>
+			          </div>
+			        </div>
+			      </form>
+		            
+				</div>
+				
+			<table class="table table-hover table-bordered table-sm">
+			<thead class="thead-light text-center">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">First Name</th>
+					<th scope="col">Middle Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Action</th>
+					
+				</tr>
+			</thead>
+				<!-- Loop Over and print out list patient -->
+				
+				<tbody>
+				
+					<tr class="text-center" th:each="patient,iterationStatus : ${patientList}" >
+						<td th:text=${iterationStatus.count}/>
+						<td th:text=${patient.firstName}/>
+						<td th:text=${patient.middleName}/>
+						<td th:text=${patient.lastName}/>
+						<td>
+						
+							<!-- display view, update and delete link -->
+							<a class="btn btn-outline-info btn-sm" th:href="@{/patient/showPatientInfo(patientId=${patient.id}) }"
+							 	role="button">View</a>
+							
+							<a class="btn btn-outline-success btn-sm" th:href="@{/patient/showFormForUpdate(patientId=${patient.id}) }"
+								role="button">Edit</a>
+							
+							<a class="btn btn-outline-danger btn-sm" th:href="@{/patient/delete(patientId=${patient.id}) }"
+								onclick="if (!(confirm('Are you sure to delete this patient?'))) return false"
+								role="button">Delete</a>
+						</td>
+						
+					</tr>
+				</tbody>
+				
+				
+			</table>
+		</div>
+		
+			<!-- <div class="col-2"></div> -->	
+		</div>
+            
+            
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!------------------Sticky Footer---------------->
+        <div th:replace="fragments/admin-template :: footer-fragment">
+          
+        </div>  <!--End of footer fragment--->
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    
+    <div th:replace="fragments/admin-template :: modal-fragment">
+    
+    </div>  <!---End of modal fragment--->
+    
+    <div th:replace="fragments/admin-template :: script-fragment">
+    
+    </div>  <!--End of script fragment-->
+  </body>
+
+</html>

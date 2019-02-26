@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+  <head th:replace="fragments/admin-template :: header-fragment">
+
+  </head>
+
+  <body id="page-top">
+	<!-------NAV BAR-------------------->
+  <div th:replace="fragments/admin-template :: navbar-fragment">
+
+   </div> <!--- End of navbar-fragment---->
+   
+	<!-----End of NAVBAR ---------------->
+  
+  <!---------------------------------- Sidebar ------------------------>
+    <div id="wrapper">
+
+      <div th:replace="fragments/admin-template :: sidebar-fragment">
+
+      
+     </div>  <!----End of sidebar fragment---> 
+     
+     
+	<!----------- Admin Main Content ------------------------>
+	
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+          <!-- Breadcrumbs-->
+          
+	          <ol class="breadcrumb" th:object="${patientInfo}">
+	            <li class="breadcrumb-item">
+	              <a href="index">Dashboard</a>
+	            </li>
+	            <li class="breadcrumb-item active" >Patient Name: <span class="text-uppercase font-weight-bold"
+	            				 th:text="${patientInfo.getPatientFullName()}"></span></li>
+	          </ol>
+		
+          
+          <div class="card">
+          	<div class="card-body">
+          		<div class="" th:object="${patientInfo}" >
+          			<p> Gender: <span class="font-weight-bold" th:text="*{gender}"></span></p>
+          			<p> Date of Birth: <span class="font-weight-bold" th:text="*{#dates.format(dateOfBirth, 'dd-MMM-yyy')}"></span></p>
+          			<p> Address: <span class="font-weight-bold" th:text="*{address}"></span></p>
+          			
+          			
+          		</div>
+          	</div>
+          </div>
+          <div>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+			  <li class="nav-item">
+			    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#medication-for-patient" role="tab" aria-controls="medication" aria-selected="true">Medication</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#physician-for-patient" role="tab" aria-controls="physician" aria-selected="false">Physician</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#pharmacy-for-patient" role="tab" aria-controls="pharmacy" aria-selected="false">Pharmacy</a>
+			  </li>
+		</ul>
+		</div>
+		<!-- ---Medication Tab -->
+		<div class="tab-content mt-1" id="myTabContent">
+								<!-- Add new button: Add Patient -->
+	
+
+		  <div class="tab-pane fade show active" id="medication-for-patient" role="tabpanel" aria-labelledby="medication-tab">
+		  <!-- input type="button" class="btn btn-primary mb-3 mt-3" value = "Add Medication"
+				onclick="window.location.href='/medication/showAddMedicationForm()'; return false;"/ --> 
+		  <a role="button" class="btn btn-primary mb-3 mt-3"
+		      th:href="@{/medication/showAddMedicationForm(patientId=${patientInfo.id})}">Add Medication For Patient</a>
+		       
+			<table class="table table-striped table-bordered table-sm">
+				<thead class="thead-light text-center">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Medication</th>
+						<th scope="col">Strength</th>
+						<th scope="col">Dosage</th>
+						<th scope="col">Action</th>
+
+					</tr>
+				</thead>
+				<!-- Loop Over and print out list patient -->
+					
+					<tbody>
+						
+
+						<tr class="text-center"
+							th:each="medication,iterationStatus : ${medicationsForPatient}">
+							<td th:text=${iterationStatus.count} />
+							<td th:text=${medication.medicationName} />
+							<td th:text=${medication.medicationStrength} />
+							<td th:text=${medication.medicationDosage} />
+							<td>
+								<!-- display view, update and delete link -->
+							
+							
+							<a class="btn btn-outline-success btn-sm" 
+								th:href="@{/medication/showUpdateMedicationForm(medicationId=${medication.id}, patientId=${patientInfo.id}) }"
+								role="button">Edit</a>
+							
+							<a class="btn btn-outline-danger btn-sm" 
+								th:href="@{/medication/deleteMedication(medicationId=${medication.id}, patientId=${patientInfo.id}) }"
+								onclick="if (!(confirm('Are you sure to delete this medication?'))) return false"
+								role="button">Delete</a>
+								
+							
+							</td>
+
+						</tr>
+					</tbody>
+				
+				
+			</table>
+
+		 </div>
+		 
+		 <!-- Physician Tab -->
+
+		 
+		  <div class="tab-pane fade" id="physician-for-patient" role="tabpanel" aria-labelledby="physician-tab">
+		 	
+		 	<a role="button" class="btn btn-primary mb-3 mt-3" 
+				th:href="@{/physician/addPhysicianToPatientForm(patientId=${patientInfo.id})}">Add Physician For Patient</a>
+		
+	
+			<table class="table table-hover table-bordered table-sm">
+				<thead class="thead-light text-center">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Specialty</th>
+						<th scope="col">Address</th>
+						<th scope="col">Action</th>
+						
+					</tr>
+				</thead>
+				<!-- Loop Over and print out list patient -->
+				
+				<tbody>
+		
+					<tr class="text-center" th:each="physician,iterationStatus : ${physiciansForPatient}" >
+						<td th:text=${iterationStatus.count}/>
+						<td th:text=${physician.physicianName}/>
+						<td th:text=${physician.physicianSpecialty}/>
+						<td th:text=${physician.physicianAddress}/>
+						
+						<td>
+										
+								<!-- display view, update and delete link 
+								<a class="btn btn-outline-info btn-sm" th:href="@{/patient/showPhysicianInfo(physicianId=${physician.id}) }"
+								 	role="button">View</a>
+								
+								<a class="btn btn-outline-success btn-sm" th:href="@{/patient/showFormForUpdatePhysician(physicianId=${physician.id}) }"
+									role="button">Edit</a>
+									-->
+								<a class="btn btn-outline-danger btn-sm" 
+									th:href="@{/physician/deletePhysician(physicianId=${physician.id}, patientId=${patientInfo.id}) }"
+									onclick="if (!(confirm('Are you sure to delete this physician?'))) return false"
+									role="button">Delete</a>
+									
+								
+						</td>
+							
+					</tr>
+				</tbody>
+							
+							
+			</table>		  
+		  </div>
+<!-- ***************Pharmacy Tab********************************** -->
+
+
+		  <div class="tab-pane fade" id="pharmacy-for-patient" role="tabpanel" aria-labelledby="pharmacy-tab">
+		 
+		<!-- <input type="button" class="btn btn-primary mb-3 mt-3" value = "Add Pharmacy For Patient"
+				onclick="window.location.href='/pharmacy/showAddPharmacyForm'; return false;"/> 	
+		 -->
+		 	<a role="button" class="btn btn-primary mb-3 mt-3" 
+				th:href="@{/pharmacy/addPharmacyToPatientForm(patientId=${patientInfo.id})}">Add Pharmacy For Patient</a>
+							
+			<table class="table table-hover table-bordered table-sm">
+				<thead class="thead-light text-center">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Pharmacy Name</th>
+						<th scope="col">Address</th>
+						
+						<th scope="col">Action</th>
+						
+					</tr>
+				</thead>
+				<!-- Loop Over and print out list patient -->
+				
+				<tbody>
+		
+					<tr class="text-center" th:each="pharmacy,iterationStatus : ${pharmaciesForPatient}" >
+						<td th:text=${iterationStatus.count}/>
+						<td th:text=${pharmacy.pharmacyName}/>
+						<td th:text=${pharmacy.pharmacyAddress}/>
+						
+						<td>
+										
+								<!-- display view, update and delete link 
+								<a class="btn btn-outline-info btn-sm" th:href="@{/patient/showPharmacyInfo(pharmacyId=${pharmacy.id}) }"
+								 	role="button">View</a>
+								
+								<a class="btn btn-outline-success btn-sm" th:href="@{/patient/showFormForUpdatePharmacy(pharmacyId=${pharmacy.id}) }"
+									role="button">Edit</a>
+								-->
+								<a class="btn btn-outline-danger btn-sm" 
+									th:href="@{/pharmacy/deletePharmacy(pharmacyId=${pharmacy.id}, patientId=${patientInfo.id}) }"
+									onclick="if (!(confirm('Are you sure to delete this pharmacy?'))) return false"
+									role="button">Delete</a>
+									
+									
+						</td>
+							
+					</tr>
+				</tbody>
+							
+							
+			</table>		  
+		  </div>
+		</div>
+
+
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- /.content-wrapper -->
+
+  
+    <!-- /#wrapper -->
+    
+        <!------------------Sticky Footer---------------->
+        <div th:replace="fragments/admin-template :: footer-fragment">
+          
+        </div>  <!--End of footer fragment--->
+    	<div th:replace="fragments/admin-template :: modal-fragment">
+    
+   		 </div>  <!---End of modal fragment--->
+    
+    <div th:replace="fragments/admin-template :: script-fragment">
+    
+    </div>  <!--End of script fragment-->
+  </body>
+
+</html>

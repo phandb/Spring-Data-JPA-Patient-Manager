@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+  <head th:replace="fragments/admin-template :: header-fragment">
+
+  </head>
+
+  <body id="page-top">
+	<!-------NAV BAR-------------------->
+  <div th:replace="fragments/admin-template :: navbar-fragment">
+
+   </div> <!--- End of navbar-fragment---->
+   
+	<!-----End of NAVBAR ---------------->
+  
+  <!---------------------------------- Sidebar ------------------------>
+    <div id="wrapper">
+
+      <div th:replace="fragments/admin-template :: sidebar-fragment">
+
+      
+     </div>  <!----End of sidebar fragment---> 
+     
+     
+	<!----------- Admin Main Content ------------------------>
+	
+      <div id="content-wrapper">
+        <!----No Fragment this section - Main Content---->
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+           <div th:replace="fragments/admin-template :: breadcrumb-fragment">
+          </div>
+
+          <!-- Icon Cards-->
+          <div class="row">
+            <div class="col-xl-12 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon">
+                    <i class="fas fa-fw fa-comments"></i>
+                  </div>
+                  <div class="mr-5 text-center">Project Summary</div>
+                </div>
+                <div class="card-footer text-white clearfix small z-1" >
+                  <ul>
+                    <li>Spring Boot Version 2.1.2.RELEASE</li>
+                    <li>Maven Version</li>
+                    <li>Spring MVC</li>
+                    <li>Spring Boot Security</li>
+                    <li>Thymeleaf</li>
+                    <li>Bootstrap Version 4.2.1</li>
+                  
+                  </ul>
+                 
+                </div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!------------------Sticky Footer---------------->
+        <div th:replace="fragments/admin-template :: footer-fragment">
+          
+        </div>  <!--End of footer fragment--->
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    
+    <div th:replace="fragments/admin-template :: modal-fragment">
+    
+    </div>  <!---End of modal fragment--->
+    
+    <div th:replace="fragments/admin-template :: script-fragment">
+    
+    </div>  <!--End of script fragment-->
+  </body>
+
+</html>
