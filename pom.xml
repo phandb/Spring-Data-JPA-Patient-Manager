@@ -28,12 +28,12 @@
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		
-				<!-- Spring Security Support
+				<!-- Spring Security Support-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		-->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -66,20 +66,27 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>
+		
+		
 		<!-- JUnit Testing-->		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- 
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
-		 -->
+		
 	</dependencies>
 
 	<build>

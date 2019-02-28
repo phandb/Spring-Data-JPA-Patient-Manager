@@ -31,16 +31,26 @@
       <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-          <form>
+          <form action="${pageContext.request.contextPath}/authenticateTheUser" method="POST" >
+          
+          	<!-- check for login error -->
+          	
+          	<th:if test="${param.error !=null}">
+          		<div class="alert alert-danger"> Invalid username or password</div>
+          	</th:if>
+          	
             <div class="form-group">
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+               <!--  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
                 <label for="inputEmail">Email address</label>
+                 -->
+                 <input type="text" name="username" id="inputUser" class="form-control" placeholder="User Name" required="required" autofocus="autofocus">
+                <label for="inputUser">User Name</label>
               </div>
             </div>
             <div class="form-group">
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
                 <label for="inputPassword">Password</label>
               </div>
             </div>
@@ -52,7 +62,7 @@
                 </label>
               </div>
             </div>
-            <a class="btn btn-primary btn-block" th:href="@{index.html}">Login</a>
+            <button type="submit" class="btn btn-primary btn-block" th:href="@{index.html}">Login</button> 
           </form>
           <div class="text-center">
             <a class="d-block small mt-3" th:href="register.html">Register an Account</a>
