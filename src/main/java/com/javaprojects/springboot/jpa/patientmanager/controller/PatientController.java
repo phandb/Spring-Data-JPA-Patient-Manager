@@ -51,7 +51,7 @@ public class PatientController {
 	//Route 
 	@GetMapping("/index")
 	public String adminIndex() {
-		return "admin/index";
+		return "/admin/index";
 	}
 	
 	//add mapping for /list

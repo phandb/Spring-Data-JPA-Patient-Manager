@@ -4,12 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+//@RequestMapping("/patient-manager")
 public class LoginController {
 	
-	@GetMapping("/showMyLoginPage")
-	public String showMyLoginPage() {
 		
-		return "login";
+	@GetMapping("/showLoginPage")
+	public String login() {
+		
+		return "/user/login";
+	}
+	
+	@GetMapping("/access-denied")
+	public String showAccessDenied() {
+		
+		return "/errors/access-denied";
 	}
 
 }

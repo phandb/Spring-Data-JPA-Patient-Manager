@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//@Data
 @Entity
 @Table(name="roles")
 public class Role {
@@ -16,15 +17,15 @@ public class Role {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "role")
+	private String roleName;
 	
 	public Role() {
 		
 	}
 	
-	public Role(String name) {
-		this.name = name;
+	public Role(String role) {
+		this.roleName = role;
 	}
 
 	public Long getId() {
@@ -35,17 +36,17 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 	
 	@Override
 	public String toString() {
-		return "Role{" + "id=" + id + ", name='" + name + '\'' + '}';
+		return "Role{" + "id=" + id + ", name='" + roleName + '\'' + '}';
 	}
 
 }

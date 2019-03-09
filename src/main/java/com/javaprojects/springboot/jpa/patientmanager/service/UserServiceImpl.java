@@ -2,6 +2,8 @@ package com.javaprojects.springboot.jpa.patientmanager.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,47 +25,60 @@ import com.javaprojects.springboot.jpa.patientmanager.user.CustomRegisterUser;
 @Service
 public class UserServiceImpl implements UserService {
 	
+	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
 	private RoleRepository roleRepository;
 	
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	/*
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	*/
+	
+	/*
 	@Autowired
 	public UserServiceImpl(UserRepository userRepository,
-								   RoleRepository roleRepository) {
+						   RoleRepository roleRepository,
+						   BCryptPasswordEncoder bCryptPasswordEncoder) {
 		
 		this.userRepository=userRepository;
 		this.roleRepository=roleRepository;
+		this.bCryptPasswordEncoder=bCryptPasswordEncoder;
 	}
-	
+	*/
 	@Override
-	public User findByUserName(String userName) {
+	public User findByUsername(String userName) {
 		
 		return userRepository.findByUserName(userName);
 	}
 
 	@Override
-	public void save(CustomRegisterUser customRegisterUser) {
-
+	public void saveUser(CustomRegisterUser custRegUser) {
+		
 		User user = new User();
+		
 		// assign user details to the user object
-		user.setUserName(customRegisterUser.getUserName());
-		user.setPassword(passwordEncoder.encode(customRegisterUser.getPassword()));
-		user.setFirstName(customRegisterUser.getFirstName());
-		user.setLastName(customRegisterUser.getLastName());
-		user.setEmail(customRegisterUser.getEmail());
+		user.setUserName(custRegUser.getUserName());
+		user.setPassword(bCryptPasswordEncoder.encode(custRegUser.getPassword()));
+		user.setFirstName(custRegUser.getFirstName());
+		user.setLastName(custRegUser.getLastName());
+		user.setEmail(custRegUser.getEmail());
+		//user.setActive(1);
 		
-		//then give user default role of "employee"
-		user.setRoles(Arrays.asList(roleRepository.findByRoleName("ROLE_EMPLOYEE")));
+		//then give user default role of "Guest"
+		user.setRoles(Arrays.asList(roleRepository.findByRoleName("Guest")));
 		
-		//save user in the database
+		//save user in database
 		userRepository.save(user);
-
+		
 		
 	}
 	
-
+	
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -76,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
 	}
 
 

@@ -1,6 +1,9 @@
 package com.javaprojects.springboot.jpa.patientmanager.model;
 
+
+
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,9 +16,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 
-
+//@Data
 @Entity
 @Table(name= "users")
 public class User {
@@ -26,18 +32,26 @@ public class User {
 	private Long id;
 	
 	@Column(name = "username")
+	@Length(min= 5, message="*User name must be at least 5 characters")
+	@NotEmpty(message="*Please provide an username")
 	private String userName;
 	
 	@Column(name = "password")
+	@Length(min= 5, message="*Password must be at least 5 characters")
+	@NotEmpty(message="*Please provide a password")
 	private String password;
 	
 	@Column(name = "first_name")
+	@NotEmpty(message="*Please provide your first name")
 	private String firstName;
 	
 	@Column(name = "last_name")
+	@NotEmpty(message="*Please provide your last name")
 	private String lastName;
 	
 	@Column(name = "email")
+	//@Email(message="*Please provide a valiasd email")
+	@NotEmpty(message="*Please provide a email")
 	private String email;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

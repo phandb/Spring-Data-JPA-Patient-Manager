@@ -10,6 +10,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	//@Query Query<User> theQuery = currentSession.createQuery("from User where userName=:uName", User.class);
 	//theQuery.setParameter("uName", theUserName);
 	
-	public User findByUserName(String userName);
+	User findByUserName(String userName);
+	
+	//void save(User user);
 
 }
