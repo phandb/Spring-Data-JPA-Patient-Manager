@@ -19,7 +19,7 @@ import com.javaprojects.springboot.jpa.patientmanager.service.UserService;
 import com.javaprojects.springboot.jpa.patientmanager.user.CustomRegisterUser;
 
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/registration")
 public class RegistrationController {
 	
 	@Autowired
@@ -34,11 +34,11 @@ public class RegistrationController {
 	}
 	
 	@GetMapping("/showRegistrationForm")
-	public String showLoginPage(Model theModel) {
+	public String showRegistrationForm(Model theModel) {
 		
-		theModel.addAttribute("crmUser", new CustomRegisterUser());
+		theModel.addAttribute("custRegUser", new CustomRegisterUser());
 		
-		return "registration-form";
+		return "/user/registration-form";
 	}
 	
 	@PostMapping("/processRegistrationForm")
@@ -50,23 +50,23 @@ public class RegistrationController {
 		
 		//form validation
 		if(bindingResult.hasErrors()) {
-			return "registration-form";
+			return "/user/registration-form";
 		}
 		
 		//chaeck database for user already exists
 		
 		User existingUser = userService.findByUsername(userName);
 		if(existingUser != null) {
-			theModel.addAttribute("custUser", new CustomRegisterUser());
+			theModel.addAttribute("custRegUser", new CustomRegisterUser());
 			theModel.addAttribute("registrationError", "user name already exists!");
 			
-			return "registration-form";
+			return "/user/registration-form";
 		}
 		
 		//create user account
 		userService.saveUser(custRegUser);
 		
-		return "registration-confirmation";
+		return "/admin/index";
 	}
 
 }

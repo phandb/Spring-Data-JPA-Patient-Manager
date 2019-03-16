@@ -35,31 +35,51 @@ public class PatientManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-			.antMatchers("/").hasRole("Guest")
-			.antMatchers("/admin/**").hasRole("User")
-			.antMatchers("/admin/**").hasRole("Admin")
+				.antMatchers("/user/**",
+							"/home/**", 
+							"/error/**",
+							"/fragments/**",
+							"/registration/**")
+					.permitAll()  /*all users are allowed to enter application*/
+				/* Specify access for each role*/
+				.antMatchers("/admin/index").hasRole("GUEST")
+				.antMatchers("/admin/**").hasRole("USER")
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				/*Any other request will be authenticated*/
+				.anyRequest().authenticated()
 			.and()
-			.formLogin()
-				.loginPage("/showLoginPage")
-				.loginProcessingUrl("/authenticateTheUser")
-				.successHandler(customAuthenticationSuccessHandler)
+				/*start form login*/
+				.formLogin() 
+					.loginPage("/showLoginPage")
+					.loginProcessingUrl("/user/login")
+					.successHandler(customAuthenticationSuccessHandler)
+					.defaultSuccessUrl("/admin/index")
+					/* parameters in the submitted login form*/
+					.usernameParameter("username")
+					.passwordParameter("password")
+					.permitAll()
+			.and()
+				/* call logout form*/
+				.logout()
+				.logoutUrl("/user/logout")
+				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
 				.permitAll()
 			.and()
-			.logout().permitAll()
-			.and()
-			.exceptionHandling().accessDeniedPage("/access-denied");
+				.exceptionHandling().accessDeniedPage("/error/access-denied")
+			/* disable Cross-Site Request Forgery*/
+			.and().csrf().disable();
 	
 	}
 	
 
-	/*
+	
 	@Override
 	public void configure(WebSecurity webSecurity) throws Exception{
 		webSecurity.ignoring()
-				   .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+				   .antMatchers("/resources/**", "/static/**", "/vendor/**", "/js/**", "/css/**");
 	}
 	
-	*/
+	
 	//beans
 	//bcrypt bean definition
 	@Bean

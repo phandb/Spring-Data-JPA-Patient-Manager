@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <title>Registration</title>
+
+    <!-- Bootstrap core CSS-->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+
+  </head>
+
+  <body class="bg-dark">
+
+    <div class="container">
+      <div class="card card-register mx-auto mt-5">
+   	     <div th:if="${param.success}">
+             <div class="alert alert-info">
+                 You've successfully registered to our awesome app!
+             </div>
+         </div>
+        <div class="card-header">Register an Account</div>
+        <div class="card-body">
+          <form th:action="@{/registration/processRegistrationForm}" th:object="${custRegUser}" method="post">
+         
+            <div class="form-group">
+             
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                  	<label for="firstName">First Name</label>
+                    <input  id="firstName" 
+                    		class="form-control" 
+							th:field="*{firstName}" />
+					
+                    
+                  </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+             
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                  	<label for="lastName">Last Name</label>
+                    <input  id="lastName" 
+                    		class="form-control" 
+							th:field="*{lastName}" />
+					
+                    
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+             <div class="col-md-6">
+                <label for="email" >E-mail</label>
+                <input id="email"
+                       class="form-control"
+                       th:field="*{email}"/>
+             </div> 
+            </div>
+            
+            <div class="form-group">
+            	<div class="col-md-6">
+                 <label for="userName" >User Name</label>
+                 <input id="userName"
+                        class="form-control"
+                        th:field="*{userName}"/>
+                </div>
+             </div>      
+             <div class="form-group">
+             	<div class="col-md-6">
+                 <label for="password" >Password</label>
+                 <input id="password"
+                        class="form-control"
+                        type="password"
+                        th:field="*{password}"/>
+                </div>
+             </div>
+             <div class="form-group">
+             	<div class="col-md-6">
+                 <label for="matchingPassword" >Confirm password</label>
+                 <input id="matchingPassword"
+                        class="form-control"
+                        type="password"
+                        th:field="*{matchingPassword}"/>
+              	</div>
+             </div>
+        	<div class="form-group">
+           		<button type="submit" class="btn btn-success">Register</button>
+           		<span>Already registered? <a th:href="@{/showLoginPage}">Login here</a></span>
+           	</div>
+            
+          </form>
+          <div class="text-center">
+            <a class="d-block small mt-3" th:href="@{/showLoginPage}">Login Page</a>
+            <a class="d-block small" th:href="@{/forgot-password}">Forgot Password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  </body>
+
+</html>
