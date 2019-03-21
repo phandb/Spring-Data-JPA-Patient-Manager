@@ -23,13 +23,7 @@ public class PatientManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired 
 	private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-	
-	@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
 
-	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -42,26 +36,21 @@ public class PatientManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 							"/registration/**")
 					.permitAll()  /*all users are allowed to enter application*/
 				/* Specify access for each role*/
-				.antMatchers("/admin/index").hasRole("GUEST")
+				/*.antMatchers("/admin/**").hasRole("GUEST")*/
 				.antMatchers("/admin/**").hasRole("USER")
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				/*Any other request will be authenticated*/
-				.anyRequest().authenticated()
-			.and()
+					
 				/*start form login*/
-				.formLogin() 
-					.loginPage("/showLoginPage")
-					.loginProcessingUrl("/user/login")
+				.and().formLogin() 
+					.loginPage("/login-page").failureUrl("/login-page?error")
+					.loginProcessingUrl("/authenticateTheUser")
 					.successHandler(customAuthenticationSuccessHandler)
-					.defaultSuccessUrl("/admin/index")
-					/* parameters in the submitted login form*/
-					.usernameParameter("username")
-					.passwordParameter("password")
 					.permitAll()
-			.and()
+			
 				/* call logout form*/
-				.logout()
-				.logoutUrl("/user/logout")
+			.and().logout()
+				.logoutUrl("/user/logout").logoutSuccessUrl("/login-page?loggedOut")
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
 				.permitAll()
 			.and()
@@ -95,6 +84,14 @@ public class PatientManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
 		return auth;
 	}
+	
+	
+	@Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
+
+	
 	
 
 

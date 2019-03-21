@@ -35,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		
 		//forward to home page
 		
-		response.sendRedirect(request.getContextPath() + "/admin/index");
+		response.sendRedirect(request.getContextPath() + "/patient/list");
 		
 	}
 

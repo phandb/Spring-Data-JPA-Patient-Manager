@@ -37,7 +37,7 @@
         <div class="card-header">Login</div>
         <div class="card-body">
        		 
-          <form th:action="@{/user/login}" method="post" >
+          <form th:action="@{/authenticateTheUser}" method="post" >
           	<div th:if="${param.error}" 
         		class="alert alert-danger">
         		Invalid username or password
@@ -54,10 +54,9 @@
               	<label for="username">User Name</label>
                 <input type="text" 
                 		id="username" 
+                		name="username"
                 		class="form-control" 
-                		placeholder="" 
-                		required="required" 
-                		autofocus="autofocus">
+                		>
                 
               </div>
             </div>
@@ -67,9 +66,9 @@
               	<label for="password">Password</label>
                 <input type="password" 
                 		id="password" 
+                		name="password"
                 		class="form-control" 
-                		placeholder="" 
-                		required="required">
+                		>
                 
               </div>
             </div>

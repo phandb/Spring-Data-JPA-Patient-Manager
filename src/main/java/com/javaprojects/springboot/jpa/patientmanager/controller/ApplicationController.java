@@ -1,13 +1,11 @@
 package com.javaprojects.springboot.jpa.patientmanager.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import com.javaprojects.springboot.jpa.patientmanager.model.User;
 import com.javaprojects.springboot.jpa.patientmanager.service.UserService;
 
 @Controller
@@ -19,20 +17,18 @@ public class ApplicationController {
 	@GetMapping("/")
 	public String showHome() {
 		
-		return "/admin/index";
+		return "/home/index";
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/home/login")
 	public String login(Model theModel) {
-		return "login";
+		return "/home/login";
 	}
 	
 	//Request mapping for user and admin role
-	@GetMapping("/admin/index")
-	public String showAdmins() {
-		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	@GetMapping("/admin")
+	public String successLogin() {
 		
-		User user = userService.findByUsername(auth.getName());*/
 		return "/admin/index";
 	}
 

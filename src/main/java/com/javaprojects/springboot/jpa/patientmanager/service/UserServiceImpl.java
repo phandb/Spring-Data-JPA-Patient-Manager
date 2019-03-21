@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 		//user.setActive(1);
 		
 		//then give user default role of "Guest"
-		user.setRoles(Arrays.asList(roleRepository.findByRoleName("Guest")));
+		user.setRoles(Arrays.asList(roleRepository.findByRoleName("ADMIN")));
 		
 		//save user in database
 		userRepository.save(user);
