@@ -50,7 +50,6 @@ public class PatientManagerSecurityConfig extends WebSecurityConfigurerAdapter {
 			
 				/* call logout form*/
 			.and().logout()
-				.logoutUrl("/user/logout").logoutSuccessUrl("/login-page?loggedOut")
 				.invalidateHttpSession(true).deleteCookies("JSESSIONID")
 				.permitAll()
 			.and()
